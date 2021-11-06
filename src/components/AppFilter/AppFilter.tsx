@@ -1,3 +1,4 @@
+import React from 'react';
 import s from './AppFilter.module.css';
 
 const {btnGroupBlock}=s;

@@ -1,12 +1,10 @@
-import s from './SearchPanel.module.css';
+import React from 'react';
 
 
-const{searchPanel}=s;
-
-export const SearchPanel=()=>{
-    return(
+export const SearchPanel = () => {
+    return (
         <input type="text"
-        className='form-control search-input'
-        placeholder={'Найти сотрудника'}/>
+               className="form-control search-input"
+               placeholder={'Найти сотрудника'}/>
     )
 }
