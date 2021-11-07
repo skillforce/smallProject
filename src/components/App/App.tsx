@@ -5,17 +5,24 @@ import {SearchPanel} from '../SearchPanel/SearchPanel';
 import {AppFilter} from '../AppFilter/AppFilter';
 import {EmployeesList} from '../EmployeesList/EmployeesList';
 import {EmployeesAddForm} from '../EmployeesAddForm/EmployeesAddForm';
-import {EmployeesListItemType} from '../EmployeesListItem/EmployeesListItem';
+
+
+
+export type StateDataType = {
+    name: string
+    salary: number
+    id: string
+    isIncrease: boolean
+    forRaising: boolean
+}
 
 
 const {app, searchPanel} = s
 
 
+class App extends React.Component<{}, { data: StateDataType[] }> {
 
-class App extends React.Component<{}, { data: EmployeesListItemType[] }> {
-
-     id =()=> 'id' + Math.random().toString(16).slice(2)
-
+    id = () => 'id' + Math.random().toString(16).slice(2)
 
     constructor(props: {}) {
         super(props);
@@ -23,32 +30,49 @@ class App extends React.Component<{}, { data: EmployeesListItemType[] }> {
             data: [{id: this.id(), name: 'Denis', salary: 800, isIncrease: false, forRaising: false},
                 {id: this.id(), name: 'Oleg', salary: 1200, isIncrease: false, forRaising: false},
                 {id: this.id(), name: 'Polina', salary: 930, isIncrease: false, forRaising: false},
-                {id: this.id(), name: 'Ivan', salary: 1230, isIncrease: false, forRaising: false}]
+                {id: this.id(), name: 'Ivan', salary: 1230, isIncrease: false, forRaising: false}
+            ]
         }
+
     }
 
     onDeleteEmployees = (EmployeesId: string) => {
         this.setState(({data}) => ({data: data.filter(t => t.id !== EmployeesId)}))
     }
     onAddEmployees = (name: string, salary: number) => {
-        const newEmployers: EmployeesListItemType = {id: this.id(), name, salary, isIncrease: false, forRaising: false}
+        const newEmployers = {id: this.id(), name, salary, isIncrease: false, forRaising: false}
         this.setState(({data}) => ({data: [...data, newEmployers]}))
+    }
+    onSetIsIncreaseHandler = (id: string) => {
+        this.setState(({data}) => ({data: data.map(t => t.id === id ? {...t, isIncrease: !t.isIncrease} : t)}))
+    }
+    onSetForRaisingHandler = (id: string) => {
+        this.setState(({data}) => ({data: data.map(t => t.id === id ? {...t, forRaising: !t.forRaising} : t)}))
     }
 
 
     render() {
+
         const {data} = this.state
+        const widget = {
+            currentEmployees: data.length,
+            forIncrease: data.filter(t => t.isIncrease).length
+        }
+
 
         return (
             <div className={app}>
-                <AppInfo/>
+                <AppInfo widget={widget}/>
 
                 <div className={searchPanel}>
                     <SearchPanel/>
                     <AppFilter/>
                 </div>
 
-                <EmployeesList onDeleteEmployees={this.onDeleteEmployees} data={data}/>
+                <EmployeesList onSetForRaisingHandler={this.onSetForRaisingHandler}
+                               onSetIsIncreaseHandler={this.onSetIsIncreaseHandler}
+                               onDeleteEmployees={this.onDeleteEmployees}
+                               data={data}/>
 
                 <EmployeesAddForm onAddEmployees={this.onAddEmployees}/>
 
