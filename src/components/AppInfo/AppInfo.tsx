@@ -15,7 +15,7 @@ export const AppInfo = (props: AppInfoPropsType) => {
     const {currentEmployees, forIncrease} = widget
     return (
         <div className={appInfo}>
-            <h1>Учет сотрудников в вкомпании № </h1>
+            <h1>Учет сотрудников в вкомпании </h1>
             <h2>Общее число сотрудников: {currentEmployees} </h2>
             <h3>Премию получат: {forIncrease} </h3>
         </div>

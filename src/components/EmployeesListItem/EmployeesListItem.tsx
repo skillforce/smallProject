@@ -1,5 +1,6 @@
-import React, {Component} from 'react';
+import React, {Component, SyntheticEvent} from 'react';
 import './EmployeesListItem.css';
+import {TogglePropType} from '../App/App';
 
 
 export type EmployeesListItemPropsType = {
@@ -9,8 +10,7 @@ export type EmployeesListItemPropsType = {
     isIncrease: boolean
     forRaising: boolean
     onDeleteEmployees: (EmployeesId: string) => void
-    onSetForRaisingHandler: (id: string) => void
-    onSetIsIncreaseHandler: (id: string) => void
+    onSetPropHandler: (id: string, prop: TogglePropType) => void
 }
 
 
@@ -20,25 +20,31 @@ export class EmployeesListItem extends Component<EmployeesListItemPropsType> {
         const {
             isIncrease,
             forRaising,
-            onSetForRaisingHandler,
-            onSetIsIncreaseHandler,
+            onSetPropHandler,
             id,
             name,
             salary,
             onDeleteEmployees
         } = this.props;
 
+        const OnClickToggleHandler = (e: any, id: string) => {
+                onSetPropHandler(id, e.currentTarget.getAttribute('data-toggle'))
+        }
+
+
         const liClassName = `list-group-item d-flex justify-content-between ${isIncrease ? 'increase' : ''} ${forRaising ? 'like' : ''}`
 
         return (
             <li className={liClassName}>
-                <span onClick={() => {
-                    onSetForRaisingHandler(id)
-                }} className="list-group-item-label">{name}</span>
+                <span onClick={(e) => {
+                    OnClickToggleHandler(e, id)
+                }} className="list-group-item-label" data-toggle={'isIncrease'}>{name}</span>
                 <input type="text" className="list-group-item-input" defaultValue={salary + '$'}/>
                 <div className="d-flex justify-content-center align-items-center">
-                    <button onClick={() => onSetIsIncreaseHandler(id)} type="button"
-                            className="btn-cookie btn-sm ">
+                    <button onClick={(e) => {
+                        OnClickToggleHandler(e, id)
+                    }} type="button"
+                            className="btn-cookie btn-sm " data-toggle={'forRaising'}>
                         <i className="fas fa-cookie">
 
                         </i>

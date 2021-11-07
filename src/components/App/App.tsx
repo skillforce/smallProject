@@ -15,6 +15,7 @@ export type StateDataType = {
     isIncrease: boolean
     forRaising: boolean
 }
+export type TogglePropType='isIncrease'|'forRaising'
 
 
 const {app, searchPanel} = s
@@ -43,12 +44,10 @@ class App extends React.Component<{}, { data: StateDataType[] }> {
         const newEmployers = {id: this.id(), name, salary, isIncrease: false, forRaising: false}
         this.setState(({data}) => ({data: [...data, newEmployers]}))
     }
-    onSetIsIncreaseHandler = (id: string) => {
-        this.setState(({data}) => ({data: data.map(t => t.id === id ? {...t, isIncrease: !t.isIncrease} : t)}))
+    onSetPropHandler = (id: string,prop:TogglePropType) => {
+        this.setState(({data}) => ({data: data.map(t => t.id === id ? {...t, [prop]: !t[prop]} : t)}))
     }
-    onSetForRaisingHandler = (id: string) => {
-        this.setState(({data}) => ({data: data.map(t => t.id === id ? {...t, forRaising: !t.forRaising} : t)}))
-    }
+
 
 
     render() {
@@ -69,8 +68,7 @@ class App extends React.Component<{}, { data: StateDataType[] }> {
                     <AppFilter/>
                 </div>
 
-                <EmployeesList onSetForRaisingHandler={this.onSetForRaisingHandler}
-                               onSetIsIncreaseHandler={this.onSetIsIncreaseHandler}
+                <EmployeesList onSetPropHandler={this.onSetPropHandler}
                                onDeleteEmployees={this.onDeleteEmployees}
                                data={data}/>
 
