@@ -7,13 +7,33 @@ const {appList} = s;
 export type EmployeesListPropsType = {
     data: EmployeesListItemType[]
 }
+export type EmployeesListStateType = {
+    data: EmployeesListItemType[]
+}
 
-export const EmployeesList = ({data}: EmployeesListPropsType) => {
-    return (
-        <div className={appList}>
-            <ul className="app-list list-group">
-                {data.map(t => <EmployeesListItem  key={t.id} {...t}/>)}
-            </ul>
-        </div>
-    )
+export class EmployeesList extends React.Component<EmployeesListPropsType, EmployeesListStateType> {
+
+
+    constructor(props: EmployeesListPropsType) {
+        super(props);
+        const {data} = props
+        this.state = {
+            data: data
+        }
+    }
+
+    onDeleteEmployees = (EmployeesId: number) => {
+        this.setState(({data}) => ({data: data.filter(t => t.id != EmployeesId)}))
+    }
+
+    render() {
+        let {data} = this.state;
+        return (
+            <div className={appList}>
+                <ul className="app-list list-group">
+                    {data.map(t => <EmployeesListItem onDeleteEmployees={this.onDeleteEmployees} key={t.id} {...t}/>)}
+                </ul>
+            </div>
+        )
+    }
 }

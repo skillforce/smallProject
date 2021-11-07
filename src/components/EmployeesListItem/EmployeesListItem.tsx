@@ -9,13 +9,21 @@ export type EmployeesListItemType = {
     isIncrease: boolean
     forRaising: boolean
 }
+export type EmployeesListItemPropsType = {
+    name: string
+    salary: number
+    id: number
+    isIncrease: boolean
+    forRaising: boolean
+    onDeleteEmployees: (EmployeesId: number) => void
+}
 export type EmployeesListItemStateType = {
     isIncrease: boolean
     forRaising: boolean
 }
 
-export class EmployeesListItem extends Component<EmployeesListItemType, EmployeesListItemStateType> {
-    constructor(props: EmployeesListItemType) {
+export class EmployeesListItem extends Component<EmployeesListItemPropsType, EmployeesListItemStateType> {
+    constructor(props: EmployeesListItemPropsType) {
         super(props);
         const {isIncrease, forRaising} = props
         this.state = {
@@ -33,7 +41,7 @@ export class EmployeesListItem extends Component<EmployeesListItemType, Employee
 
 
     render() {
-        const {name, salary} = this.props;
+        const {id, name, salary, onDeleteEmployees} = this.props;
         const {isIncrease, forRaising} = this.state
         const liClassName = `list-group-item d-flex justify-content-between ${isIncrease ? 'increase' : ''} ${forRaising ? 'like' : ''}`
         return (
@@ -48,7 +56,7 @@ export class EmployeesListItem extends Component<EmployeesListItemType, Employee
                         </i>
                     </button>
 
-                    <button type="button"
+                    <button onClick={() => onDeleteEmployees(id)} type="button"
                             className="btn-trash btn-sm ">
                         <i className="fas fa-trash">
 
