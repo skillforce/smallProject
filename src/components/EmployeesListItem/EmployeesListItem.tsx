@@ -1,21 +1,20 @@
-import {Component} from 'react';
-import React from 'react';
+import React, {Component} from 'react';
 import './EmployeesListItem.css';
 
 export type EmployeesListItemType = {
     name: string
     salary: number
-    id: number
+    id: string
     isIncrease: boolean
     forRaising: boolean
 }
 export type EmployeesListItemPropsType = {
     name: string
     salary: number
-    id: number
+    id: string
     isIncrease: boolean
     forRaising: boolean
-    onDeleteEmployees: (EmployeesId: number) => void
+    onDeleteEmployees: (EmployeesId: string) => void
 }
 export type EmployeesListItemStateType = {
     isIncrease: boolean

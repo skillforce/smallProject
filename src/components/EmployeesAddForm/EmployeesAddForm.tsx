@@ -1,5 +1,4 @@
-import {Component, FormEvent, SyntheticEvent} from 'react';
-import React from 'react';
+import React, {Component, FormEvent} from 'react';
 import './EmployeesAddForm.css';
 
 type EmployeesAddFormStateType = {
@@ -7,10 +6,14 @@ type EmployeesAddFormStateType = {
     inputSalaryValue: string
 }
 
+type EmployeesFormPropsType = {
+    onAddEmployees: (name: string, salary: number) => void
+}
 
-export class EmployeesAddForm extends Component <{}, EmployeesAddFormStateType> {
 
-    constructor(props: {}) {
+export class EmployeesAddForm extends Component <EmployeesFormPropsType, EmployeesAddFormStateType> {
+
+    constructor(props: EmployeesFormPropsType) {
         super(props)
         this.state = {
             inputNameValue: '',
@@ -26,9 +29,18 @@ export class EmployeesAddForm extends Component <{}, EmployeesAddFormStateType> 
         this.setState({inputSalaryValue: e.currentTarget.value})
     }
 
+  onAddNewEmployees=()=>{
+      const {onAddEmployees} = this.props
+      const {inputNameValue, inputSalaryValue} = this.state
+      onAddEmployees(inputNameValue, Number(inputSalaryValue))
+      this.setState({inputNameValue:'',inputSalaryValue:''})
+  }
+
+
 
     render() {
         const {inputNameValue, inputSalaryValue} = this.state
+
         return (
             <div className="app-add-form">
                 <h3>Добавьте нового сотрудника</h3>
@@ -45,7 +57,7 @@ export class EmployeesAddForm extends Component <{}, EmployeesAddFormStateType> 
                            value={inputSalaryValue}
                            onChange={this.onSetInputSalaryValue}/>
 
-                    <button type="submit"
+                    <button disabled={inputNameValue===''||inputSalaryValue===''} onClick={this.onAddNewEmployees} type="button"
                             className="btn btn-outline-light">Добавить
                     </button>
                 </form>
