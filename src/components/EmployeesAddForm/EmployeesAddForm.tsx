@@ -29,13 +29,12 @@ export class EmployeesAddForm extends Component <EmployeesFormPropsType, Employe
         this.setState({inputSalaryValue: e.currentTarget.value})
     }
 
-  onAddNewEmployees=()=>{
-      const {onAddEmployees} = this.props
-      const {inputNameValue, inputSalaryValue} = this.state
-      onAddEmployees(inputNameValue, Number(inputSalaryValue))
-      this.setState({inputNameValue:'',inputSalaryValue:''})
-  }
-
+    onAddNewEmployees = () => {
+        const {onAddEmployees} = this.props
+        const {inputNameValue, inputSalaryValue} = this.state
+        onAddEmployees(inputNameValue, Number(inputSalaryValue))
+        this.setState({inputNameValue: '', inputSalaryValue: ''})
+    }
 
 
     render() {
@@ -57,7 +56,8 @@ export class EmployeesAddForm extends Component <EmployeesFormPropsType, Employe
                            value={inputSalaryValue}
                            onChange={this.onSetInputSalaryValue}/>
 
-                    <button disabled={inputNameValue===''||inputSalaryValue===''} onClick={this.onAddNewEmployees} type="button"
+                    <button disabled={inputNameValue === '' || inputSalaryValue === ''} onClick={this.onAddNewEmployees}
+                            type="button"
                             className="btn btn-outline-light">Добавить
                     </button>
                 </form>
