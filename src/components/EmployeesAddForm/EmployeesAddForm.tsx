@@ -7,7 +7,7 @@ type EmployeesAddFormStateType = {
 }
 
 type EmployeesFormPropsType = {
-    onAddEmployees: (name: string, salary: number) => void
+    onAddEmployees: (name: string, salary: string) => void
 }
 
 
@@ -32,7 +32,7 @@ export class EmployeesAddForm extends Component <EmployeesFormPropsType, Employe
     onAddNewEmployees = () => {
         const {onAddEmployees} = this.props
         const {inputNameValue, inputSalaryValue} = this.state
-        onAddEmployees(inputNameValue, Number(inputSalaryValue))
+        onAddEmployees(inputNameValue, inputSalaryValue)
         this.setState({inputNameValue: '', inputSalaryValue: ''})
     }
 

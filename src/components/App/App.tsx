@@ -9,7 +9,7 @@ import {EmployeesAddForm} from '../EmployeesAddForm/EmployeesAddForm';
 
 export type StateDataType = {
     name: string
-    salary: number
+    salary: string
     id: string
     isIncrease: boolean
     forRaising: boolean
@@ -29,10 +29,10 @@ class App extends React.Component<{}, { data: StateDataType[], searchText: strin
     constructor(props: {}) {
         super(props);
         this.state = {
-            data: [{id: this.id(), name: 'Denis', salary: 800, isIncrease: false, forRaising: false},
-                {id: this.id(), name: 'Oleg', salary: 1200, isIncrease: false, forRaising: false},
-                {id: this.id(), name: 'Polina', salary: 930, isIncrease: false, forRaising: false},
-                {id: this.id(), name: 'Ivan', salary: 1230, isIncrease: false, forRaising: false}
+            data: [{id: this.id(), name: 'Denis', salary: '800', isIncrease: false, forRaising: false},
+                {id: this.id(), name: 'Oleg', salary: '1200', isIncrease: false, forRaising: false},
+                {id: this.id(), name: 'Polina', salary: '930', isIncrease: false, forRaising: false},
+                {id: this.id(), name: 'Ivan', salary: '1230', isIncrease: false, forRaising: false}
             ],
             searchText: '',
             filter: 'none' as const
@@ -43,7 +43,7 @@ class App extends React.Component<{}, { data: StateDataType[], searchText: strin
     onDeleteEmployees = (EmployeesId: string) => {
         this.setState(({data}) => ({data: data.filter(t => t.id !== EmployeesId)}))
     }
-    onAddEmployees = (name: string, salary: number) => {
+    onAddEmployees = (name: string, salary: string) => {
         const newEmployers = {id: this.id(), name, salary, isIncrease: false, forRaising: false}
         this.setState(({data}) => ({data: [...data, newEmployers]}))
     }
@@ -64,7 +64,7 @@ class App extends React.Component<{}, { data: StateDataType[], searchText: strin
             case 'forIncrease':
                 return data.filter(t => t.isIncrease)
             case 'withBigSalary':
-                return data.filter(t => t.salary > 1000)
+                return data.filter(t => Number(t.salary) > 1000)
             default:
                 return data
         }
@@ -80,6 +80,11 @@ class App extends React.Component<{}, { data: StateDataType[], searchText: strin
     }
 
 
+    onSalaryChange=(newSalary:string,id:string)=>{
+        this.setState(({data})=>({data:data.map(t=>t.id===id?{...t,salary: newSalary}:t)}))
+
+    }
+
     render() {
 
         const {data, searchText, filter} = this.state
@@ -92,7 +97,8 @@ class App extends React.Component<{}, { data: StateDataType[], searchText: strin
 
 
         const tableView = afterFilter.length === 0 ? <div className={alertMsg}>No one user</div> :
-            <EmployeesList onSetPropHandler={this.onSetPropHandler}
+            <EmployeesList onSalaryChange={this.onSalaryChange}
+                           onSetPropHandler={this.onSetPropHandler}
                            onDeleteEmployees={this.onDeleteEmployees}
                            data={afterFilter}/>
 

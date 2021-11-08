@@ -32,7 +32,7 @@ export class AppFilter extends React.Component<AppFilterPropsType> {
         return (
             <div className="btn-group">
                 <div className={btnGroupBlock}>
-                    {btnGroup.map(t => <button onClick={() => onSetFilter(t.BtnFilter)}
+                    {btnGroup.map((t,i) => <button key={i} onClick={() => onSetFilter(t.BtnFilter)}
                                                className={activeClassNameHandler(t.BtnFilter)} type={'button'}>
                         {t.label}
                     </button>)}
