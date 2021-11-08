@@ -27,8 +27,8 @@ export class EmployeesListItem extends Component<EmployeesListItemPropsType> {
             onDeleteEmployees
         } = this.props;
 
-        const OnClickToggleHandler = (e: any, id: string) => {
-                onSetPropHandler(id, e.currentTarget.getAttribute('data-toggle'))
+        const OnClickToggleHandler = (prop: TogglePropType, id: string) => {
+            onSetPropHandler(id, prop)
         }
 
 
@@ -37,14 +37,14 @@ export class EmployeesListItem extends Component<EmployeesListItemPropsType> {
         return (
             <li className={liClassName}>
                 <span onClick={(e) => {
-                    OnClickToggleHandler(e, id)
-                }} className="list-group-item-label" data-toggle={'isIncrease'}>{name}</span>
+                    OnClickToggleHandler('isIncrease', id)
+                }} className="list-group-item-label">{name}</span>
                 <input type="text" className="list-group-item-input" defaultValue={salary + '$'}/>
                 <div className="d-flex justify-content-center align-items-center">
                     <button onClick={(e) => {
-                        OnClickToggleHandler(e, id)
+                        OnClickToggleHandler('forRaising', id)
                     }} type="button"
-                            className="btn-cookie btn-sm " data-toggle={'forRaising'}>
+                            className="btn-cookie btn-sm " >
                         <i className="fas fa-cookie">
 
                         </i>
