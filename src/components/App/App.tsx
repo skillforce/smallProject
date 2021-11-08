@@ -19,7 +19,7 @@ export type TogglePropType = 'isIncrease' | 'forRaising'
 export type FilterUsersType = 'forIncrease' | 'withBigSalary' | 'none'
 
 
-const {app, searchPanel} = s
+const {app, searchPanel,alertMsg} = s
 
 
 class App extends React.Component<{}, { data: StateDataType[], searchText: string, filter: FilterUsersType }> {
@@ -91,6 +91,12 @@ class App extends React.Component<{}, { data: StateDataType[], searchText: strin
         const afterFilter = this.onFilterUserHandler(filter, searchData)
 
 
+        const tableView = afterFilter.length === 0 ? <div className={alertMsg}>No one user</div> :
+            <EmployeesList onSetPropHandler={this.onSetPropHandler}
+                           onDeleteEmployees={this.onDeleteEmployees}
+                           data={afterFilter}/>
+
+
         return (
             <div className={app}>
                 <AppInfo widget={widget}/>
@@ -99,11 +105,7 @@ class App extends React.Component<{}, { data: StateDataType[], searchText: strin
                     <SearchPanel searchText={searchText} onSetSearchText={this.onSetSearchText}/>
                     <AppFilter filter={filter} onSetFilter={this.onSetFilter}/>
                 </div>
-
-                <EmployeesList onSetPropHandler={this.onSetPropHandler}
-                               onDeleteEmployees={this.onDeleteEmployees}
-                               data={afterFilter}/>
-
+                {tableView}
                 <EmployeesAddForm onAddEmployees={this.onAddEmployees}/>
 
             </div>
