@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/skillforce/smallProject/static/css/main.cb81960a.chunk.css",
-    "main.js": "/skillforce/smallProject/static/js/main.84946157.chunk.js",
-    "main.js.map": "/skillforce/smallProject/static/js/main.84946157.chunk.js.map",
-    "runtime-main.js": "/skillforce/smallProject/static/js/runtime-main.a76f0005.js",
-    "runtime-main.js.map": "/skillforce/smallProject/static/js/runtime-main.a76f0005.js.map",
-    "static/js/2.d600d867.chunk.js": "/skillforce/smallProject/static/js/2.d600d867.chunk.js",
-    "static/js/2.d600d867.chunk.js.map": "/skillforce/smallProject/static/js/2.d600d867.chunk.js.map",
-    "index.html": "/skillforce/smallProject/index.html",
-    "static/css/main.cb81960a.chunk.css.map": "/skillforce/smallProject/static/css/main.cb81960a.chunk.css.map",
-    "static/js/2.d600d867.chunk.js.LICENSE.txt": "/skillforce/smallProject/static/js/2.d600d867.chunk.js.LICENSE.txt"
+    "main.css": "/smallProject/static/css/main.cb81960a.chunk.css",
+    "main.js": "/smallProject/static/js/main.84946157.chunk.js",
+    "main.js.map": "/smallProject/static/js/main.84946157.chunk.js.map",
+    "runtime-main.js": "/smallProject/static/js/runtime-main.ee10deeb.js",
+    "runtime-main.js.map": "/smallProject/static/js/runtime-main.ee10deeb.js.map",
+    "static/js/2.d600d867.chunk.js": "/smallProject/static/js/2.d600d867.chunk.js",
+    "static/js/2.d600d867.chunk.js.map": "/smallProject/static/js/2.d600d867.chunk.js.map",
+    "index.html": "/smallProject/index.html",
+    "static/css/main.cb81960a.chunk.css.map": "/smallProject/static/css/main.cb81960a.chunk.css.map",
+    "static/js/2.d600d867.chunk.js.LICENSE.txt": "/smallProject/static/js/2.d600d867.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.a76f0005.js",
+    "static/js/runtime-main.ee10deeb.js",
     "static/js/2.d600d867.chunk.js",
     "static/css/main.cb81960a.chunk.css",
     "static/js/main.84946157.chunk.js"
